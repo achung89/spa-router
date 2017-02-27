@@ -1,0 +1,50 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`spa-router`
+Simple single page router component
+
+@demo demo/index.html 
+-->
+
+<dom-module id="spa-router">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello sir!</h2>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'spa-router',
+
+      properties: {
+        path: {
+          type: String,
+        }
+       
+      },
+      ready: function() {
+        var ele = Polymer.dom(this.root);
+         setTimeout(function() {
+            console.log('hoho', window.location.pathname,window.onpopstate);
+            window.history.pushState({"html":'<div>hihihih</div>'},"", 'haha');
+            },5000); 
+        console.log('this is element',ele)
+        window.onpopstate = function(e){
+          console.log('hi');
+          if ( e.state ) {
+            ele.innerHTML = e.state.html;
+          }
+        };
+       
+      },
+      render: function() {
+        Polymer.dom(this.root);
+      }
+    });
+  </script>
+</dom-module>

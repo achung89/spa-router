@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`spa-router`
+Simple single page router component
+
+@demo demo/index.html 
+-->
+
+<dom-module id="spa-router">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'spa-router',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'spa-router',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
