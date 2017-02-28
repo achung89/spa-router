@@ -29,21 +29,18 @@ Simple single page router component
       },
       ready: function() {
         var ele = Polymer.dom(this.root);
-         setTimeout(function() {
-            console.log('hoho', window.location.pathname,window.onpopstate);
-            window.history.pushState({"html":'<div>hihihih</div>'},"", 'haha');
-            },5000); 
-        console.log('this is element',ele)
-        window.onpopstate = function(e){
-          console.log('hi');
-          if ( e.state ) {
-            ele.innerHTML = e.state.html;
+        console.log('ho');
+        window.onpopstate = function(event){
+          if ( event.state._spa_PATH ) {
+            ele.innerHTML;
           }
         };
-       
       },
-      render: function() {
-        Polymer.dom(this.root);
+      render: function(content) {
+        Polymer.dom(this.root).innerHTML = content;
+      },
+      registered: function() {
+        console.log('hihi');
       }
     });
   </script>
