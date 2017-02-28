@@ -1,4 +1,4 @@
-# \<spa-router\>
+# \<spa-route\>
 
 Simple single page router component
 

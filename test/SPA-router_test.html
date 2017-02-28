@@ -4,25 +4,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>spa-router test</title>
+    <title>spa-route test</title>
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../spa-router.html">
+    <link rel="import" href="../spa-route.html">
   </head>
   <body>
     <test-fixture id="basic">
       <template>
-        <spa-router></spa-router>
+        <spa-route></spa-route>
       </template>
     </test-fixture>
 
     <script>
-      suite('spa-router', function() {
+      suite('spa-route', function() {
         test('instantiating the element works', function() {
           var element = fixture('basic');
-          assert.equal(element.is, 'spa-router');
+          assert.equal(element.is, 'spa-route');
         });
       });
     </script>

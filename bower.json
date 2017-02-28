@@ -1,7 +1,7 @@
 {
-  "name": "spa-router",
+  "name": "spa-route",
   "description": "Simple single page router component",
-  "main": "spa-router.html",
+  "main": "spa-route.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0"
   },
