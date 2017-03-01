@@ -11,6 +11,7 @@
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../spa-route.html">
+    <link rel="import" href="../spa-link.html">
 
     <style is="custom-style" include="demo-pages-shared-styles">
     </style>
@@ -20,7 +21,15 @@
       <h3>Basic spa-route demo</h3>
       <demo-snippet>
         <template>
-          <spa-route></spa-route>
+          <spa-route path='path1'>a</spa-route>
+          <spa-route path='path2'>n</spa-route>
+          <spa-route path='path3'>c</spa-route>
+          <spa-route path='path4'>y</spa-route>
+          <spa-link path='path1'>1</spa-link>
+          <spa-link path='path2'>2</spa-link>
+          <spa-link path='path3'>3</spa-link>
+          <spa-link path='path4'>4</spa-link>
+          
         </template>
       </demo-snippet>
     </div>

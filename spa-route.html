@@ -1,5 +1,4 @@
 <link rel="import" href="../polymer/polymer.html">
-
 <!--
 `spa-route`
 Simple single page router component
@@ -8,13 +7,8 @@ Simple single page router component
 -->
 
 <dom-module id="spa-route">
+
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <h2>Hello sir!</h2>
   </template>
 
   <script>
@@ -24,23 +18,63 @@ Simple single page router component
       properties: {
         path: {
           type: String,
-        }
+        },
+        fileName: {
+          type: String,
+        },
        
       },
+
       ready: function() {
-        var ele = Polymer.dom(this.root);
-        console.log('ho');
-        window.onpopstate = function(event){
-          if ( event.state._spa_PATH ) {
-            ele.innerHTML;
-          }
-        };
+        this._routeComponents.push(this)
+        console.log(this._routeComponents);
+        // window.history.pushState({_spa_PATH: this.path},'',this.path);
       },
-      render: function(content) {
-        Polymer.dom(this.root).innerHTML = content;
+
+      render: function() {
+        console.log(this.path);
+        context = this;
+        fetch('/'+this.path+'.html')
+          .then(function(data) {
+            return data.text();
+          })
+          .then(function(data){
+            console.log(data);
+            context.innerHTML = data;
+          })
+          .catch(function errored(err){
+            console.log(err);
+          })
       },
+
       registered: function() {
-        console.log('hihi');
+        console.log('hi',this);
+        var context=this;
+        this._routeComponents = [];
+
+        window.addEventListener('popstate', function(event) {
+          var pathname = event.state._spa_PATH
+          if ( pathname ) {
+            var render = function() {};
+            var routeComponents = context._routeComponents;
+            for ( var i = 0; i < routeComponents.length; i++ ) {
+
+              routeComponent = routeComponents[i];
+
+              if ( routeComponent.path === pathname ) {
+                routeComponent.render.call(routeComponent);
+
+              } else {
+
+                if ( routeComponent.innerHTML ) {
+                  //implementation may vary
+                  routeComponent.innerHTML = '';
+                }
+              }
+            }
+            render();
+          }
+        });
       }
     });
   </script>
