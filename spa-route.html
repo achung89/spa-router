@@ -41,33 +41,13 @@ Simple single page router component
           .then(function(data) {
             
             
-            // var dom = domParser.parseFromString(data,'text/xml');
-            // console.log('new DOM', dom)
-            // context._encapsulateStyle = false;
-            // Polymer.dom(context.root).innerHTML = data;
-            // context._encapsulatedStyle = true;
-            var nodes = Array.from(context.parseXML(data));
-            console.log(nodes);
-            // context._observer =
-            //   Polymer.dom(context.root).observeNodes(function(info) {
-            //   console.log(info.addedNodes);
-            // });
-            var xmlString = "<div>\
-                               <content></content>\
-                               <div>   \
-                                 Text node\
-                               </div>\
-                              </div>\
-                              <content></content>"
-            var DOM = new DOMParser().parseFromString(xmlString,'text/html')
-            // console.log(DOM.body.children[0]);
-            Polymer.dom(context.root).appendChild(DOM.body.childNodes[0]);
-            // Polymer.dom(context.root).appendChild(DOM.body.childNodes[1]);
-            // nodes.forEach ( function ( node ) {
-            //   Polymer.dom(context.root).appendChild(node);
-            // })
+            var nodes = Array.from ( context.parseXML ( data ) );
 
-            //  Polymer.dom(context.root).unobserveNodes(this._observer);
+            Polymer.dom(context.root).innerHTML = '';
+            nodes.forEach ( function ( node ) {
+              Polymer.dom ( context.root ).appendChild ( node );
+            })
+            context.distributeContent(true);
           })
           .catch(function errored(err){
             console.log(err);
@@ -78,6 +58,7 @@ Simple single page router component
         var htmlDOM = domParser.parseFromString(xmlString,'text/html');
         return htmlDOM.body.childNodes;
       },
+      // Will implement with data-binding functionality
       // injectBoundHTML: function injectBoundHTML(html, element) {
       //   var template = document.createElement('template', 'dom-bind');
       //   var doc = template.content.ownerDocument;
