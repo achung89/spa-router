@@ -1,4 +1,28 @@
 <script>
+let handleStateChange = function(event) {
+          event.state = event.state || {};
+          if ( event.state._spa_PATH ) {
+            let pathname = event.state._spa_PATH;
+            var render = function() {};
+            var routeComponents = this._routeComponents;
+            for ( var i = 0; i < routeComponents.length; i++ ) {
+
+              routeComponent = routeComponents[i];
+
+              if ( routeComponent.path === pathname ) {
+                routeComponent.render.call(routeComponent);
+
+              } else {
+
+                if ( routeComponent.innerHTML ) {
+                  //implementation may vary
+                  routeComponent.innerHTML = '';
+                }
+              }
+            }
+          }
+        }
+
 let routeBehaviors = {
     ready: function() {
         this._routeComponents.push(this);
@@ -48,32 +72,10 @@ let routeBehaviors = {
 
       registered: function() {
         console.log('hi',this);
-        var context=this;
         this._routeComponents = [];
 
-        window.addEventListener('popstate', function(event) {
-          event.state = event.state || {};
-          if ( event.state._spa_PATH ) {
-            let pathname = event.state._spa_PATH;
-            var render = function() {};
-            var routeComponents = context._routeComponents;
-            for ( var i = 0; i < routeComponents.length; i++ ) {
-
-              routeComponent = routeComponents[i];
-
-              if ( routeComponent.path === pathname ) {
-                routeComponent.render.call(routeComponent);
-
-              } else {
-
-                if ( routeComponent.innerHTML ) {
-                  //implementation may vary
-                  routeComponent.innerHTML = '';
-                }
-              }
-            }
-          }
-        });
+        window.addEventListener('popstate',handleStateChange.bind(this));
+        
       },
 }
 </script>
