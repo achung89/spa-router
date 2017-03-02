@@ -6,10 +6,9 @@ route for index path '/'
 
 @demo demo/index.html 
 -->
-
+<link rel="import" href="route-behaviors.html"></link>
 <dom-module id="spa-index">
   <template>
-    <content></content>
   </template>
 
   <script>
@@ -18,12 +17,19 @@ route for index path '/'
       is: 'spa-index',
 
       properties: {
-        html: {
+        path: {
           type: String,
-          value: 'spa-route',
+          value: '/'
         },
+        filePath: String,
       },
-
+      ready: function(){
+        console.log('path',this.filePath)
+        if ( !this.filePath ) {
+          Polymer.dom(this.root).appendChild(document.createElement('content'));
+        }
+      },
+      behaviors:[routeBehaviors]
     });
   </script>
 </dom-module>

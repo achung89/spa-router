@@ -5,7 +5,7 @@ Simple single page router component
 
 @demo demo/index.html 
 -->
-
+<link rel="import" href="route-behaviors.html"></link>
 <dom-module id="spa-route">
 
   <template>
@@ -24,85 +24,10 @@ Simple single page router component
         },
        
       },
-
-      ready: function() {
-        this._routeComponents.push(this)
-        console.log(this._routeComponents);
-        // window.history.pushState({_spa_PATH: this.path},'',this.path);
-      },
-
-      render: function() {
-        console.log(this.path);
-        context = this;
-        fetch('/'+this.path+'.html')
-          .then(function(data) {
-            return data.text();
-          })
-          .then(function(data) {
-            
-            
-            var nodes = Array.from ( context.parseXML ( data ) );
-
-            Polymer.dom(context.root).innerHTML = '';
-            nodes.forEach ( function ( node ) {
-              Polymer.dom ( context.root ).appendChild ( node );
-            })
-            context.distributeContent(true);
-          })
-          .catch(function errored(err){
-            console.log(err);
-          })
-      },
-      parseXML(xmlString) {
-        var domParser = new DOMParser();
-        var htmlDOM = domParser.parseFromString(xmlString,'text/html');
-        return htmlDOM.body.childNodes;
-      },
-      // Will implement with data-binding functionality
-      // injectBoundHTML: function injectBoundHTML(html, element) {
-      //   var template = document.createElement('template', 'dom-bind');
-      //   var doc = template.content.ownerDocument;
-      //   var div = doc.createElement('div');
-      //   div.innerHTML = html;
-      //   template.content.appendChild(div);
-      //   while (element.firstChild) {
-      //       element.removeChild(element.firstChild);
-      //   }
-      //   element.appendChild(Polymer.Base.instanceTemplate(template));
-      // },
-
-      registered: function() {
-        console.log('hi',this);
-        var context=this;
-        this._routeComponents = [];
-
-        window.addEventListener('popstate', function(event) {
-          event.state = event.state || {};
-          if ( event.state._spa_PATH ) {
-            let pathname = event.state._spa_PATH;
-            var render = function() {};
-            var routeComponents = context._routeComponents;
-            for ( var i = 0; i < routeComponents.length; i++ ) {
-
-              routeComponent = routeComponents[i];
-
-              if ( routeComponent.path === pathname ) {
-                routeComponent.render.call(routeComponent);
-
-              } else {
-
-                if ( routeComponent.innerHTML ) {
-                  //implementation may vary
-                  routeComponent.innerHTML = '';
-                }
-              }
-            }
-            render();
-          }
-        });
-      },
-
-      
+      behaviors:[routeBehaviors]
     });
+  </script>
+  <script>
+
   </script>
 </dom-module>
