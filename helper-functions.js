@@ -1,5 +1,5 @@
 function parseXML(xmlString) {
-  //just one approach, time will tell if an alternative is needed
+  //just one approach, time will tell if another one will be implemented
   var wrapper= document.createElement('div');
   wrapper.innerHTML= xmlString;
   var div= wrapper.firstChild;

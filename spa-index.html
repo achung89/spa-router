@@ -25,7 +25,7 @@ route for index path '/'
         src: String,
       },
       attached: function() {
-        console.log(this.textContent.trim(), this.children.length, this.src)
+        //console.log(this.textContent.trim(), this.children.length, this.src)
         if(!this.textContent.trim() && this.children.length===0 && !this.src) {
           console.warn('Default content exception: Index routes should contain child nodes or have a "src" attribute with a path');
         }

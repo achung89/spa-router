@@ -26,8 +26,6 @@ Simple single page router component
       },
       
       navigateTo: function() {
-        var context = this;
-        console.log(context.path);
         window.history.pushState({'_spa_PATH':context.path},'',context.path);
         dispatchEvent(new PopStateEvent('popstate',{state:{'_spa_PATH':context.path}}));
       }

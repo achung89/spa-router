@@ -4,7 +4,6 @@ let routeBehaviors = {
   created: function() {
     this._routeComponents.push(this);
     //console.log(this._routeComponents);
-
   },
   ready: function() {
     if(!loadListenerAttached) {
@@ -16,23 +15,25 @@ let routeBehaviors = {
   render: function() {
     //console.log(this.path);
     var relativePathname = window.location.pathname.substr(window.location.pathname.lastIndexOf('/'));
+    //check index component for children in light DOM 
     if( (relativePathname ==='/' || relativePathname ==='/index.html') && this.path === '/') {
       if ( !this.src ) {
         Polymer.dom ( this.root ).appendChild ( document.createElement('content') );
         return;
       }
     }
+    //check to see if src has been specified other-wise default to this.path+'.html'
     if ( this.src ) {
       var fileSrc = this.src;
     } else {
       var fileSrc =  this.path+'.html';
-      console.log(fileSrc)
+      //console.log(fileSrc)
     }
-     var context = this;
+
+    var context = this;
     fetch(fileSrc)
       .then(function(data) {
         //console.log(data);
-        console.log(data);
         return data.text();
       })
       .then(function(data) {
@@ -46,9 +47,7 @@ let routeBehaviors = {
         //console.log(node, context);
         Polymer.dom ( context.root ).appendChild ( node );
       })
-      context.distributeContent(true);
-
-        
+      context.distributeContent(true); 
       executeEmbeddedJavascript(getScriptsContentInDoc(Polymer.dom(context.root).innerHTML));
       })
       .catch(function errored(err){
@@ -60,11 +59,6 @@ let routeBehaviors = {
    registered: function() {      
       this._routeComponents = [];
       window.addEventListener('popstate',handleStateChange.bind(this));
-      //window.history.pushState({'_spa_PATH':'/'},'','/');
-      var fn = function() {
-        console.log('window has been loaded');
-      }
-
   },
         
   // Will implement with data-binding functionality when needed
