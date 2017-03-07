@@ -19,12 +19,31 @@ Simple single page router component
         path: {
           type: String,
         },
-        fileName: {
+        src: {
           type: String,
         },
        
       },
-      behaviors:[routeBehaviors]
+     
+            
+      // Will implement with data-binding functionality when needed
+      // injectBoundHTML: function injectBoundHTML(html, element) {
+      //   var template = document.createElement('template', 'dom-bind');
+      //   var doc = template.content.ownerDocument;
+      //   var div = doc.createElement('div');
+      //   div.innerHTML = html;
+      //   template.content.appendChild(div);
+      //   while (element.firstChild) {
+      //       element.removeChild(element.firstChild);
+      //   }
+      //   element.appendChild(Polymer.Base.instanceTemplate(template));
+      // },
+      // isLoaded: function() {
+      //   return 
+      // },
+
+   
+    behaviors:[routeBehaviors],
     });
   </script>
   <script>

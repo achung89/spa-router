@@ -22,13 +22,13 @@ route for index path '/'
           value: '/',
           readOnly:true
         },
-        filePath: String,
+        src: String,
       },
-      ready: function(){
-        console.log('path',this.filePath, this.path)
-        if ( !this.filePath ) {
-          Polymer.dom(this.root).appendChild(document.createElement('content'));
-        } 
+      attached: function() {
+        console.log(this.textContent.trim(), this.children.length, this.src)
+        if(!this.textContent.trim() && this.children.length===0 && !this.src) {
+          console.warn('Default content exception: Index routes should contain child nodes or have a "src" attribute with a path');
+        }
       },
       behaviors:[routeBehaviors]
     });

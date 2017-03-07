@@ -25,17 +25,13 @@ function executeEmbeddedJavascript(scripts) {
   });
 }
 
-function getScriptsContentInDoc(){
-  var scriptEle = document.getElementsByTagName('script');
-  return Array.from(scriptEle).map(function(element){
-    return element.textContent;
-  });
-}
-function parseXML(xmlString) {
-        //just one approach, time will tell if an alternative is needed
-  var wrapper= document.createElement('div');
-  wrapper.innerHTML= xmlString;
-  var div= wrapper.firstChild;
-  
-  return wrapper.childNodes;
+function getScriptsContentInDoc(innerHTML){
+  var scriptContentRE = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
+
+  var match;
+  var scripts = [];
+  while (match = scriptContentRE.exec(innerHTML)) {
+    scripts.push(match[1]);
+  }
+  return scripts;
 }
