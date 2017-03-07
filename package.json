@@ -1,0 +1,26 @@
+{
+  "name": "single-page-router",
+  "version": "1.0.0",
+  "description": "Simple single page router component",
+  "main": "spa-route.html",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achung89/spa-router.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/achung89/spa-router/issues"
+  },
+  "homepage": "https://github.com/achung89/spa-router#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-vulcanize": "^6.1.0"
+  }
+}
